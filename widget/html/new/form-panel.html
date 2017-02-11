@@ -1,0 +1,124 @@
+'<div :class="[\'content-right\',twoColumn&&\'content-right-wider\',opeType==\'view\'&&\'content-view\']" >'+
+                '<div class="class-cr clearfix">'+
+                    '<slot name="title">'+
+                        '<a class="item-btn hover">'+
+                            '<i class="icon-pencil"></i>'+
+                            '<span class="operName1">{{autoTitle}}</span>'+
+                        '</a>'+
+                        '<p class="item-list2">'+
+                            '<template v-if="customOpera">'+
+                                '<template v-for="item in customOpera">'+
+                                    '<a href="javascript:;" class="item-btn"  v-on:click="item.operaFun()">{{item.name}}</a>'+
+                                '</template>'+
+                                '<a href="javascript:;" class="item-btn item-btn2" v-on:click="close()"><i class="icon-remove"></i>关闭</a>'+
+                            '</template>'+
+                            '<template v-else>'+
+                                '<a href="javascript:;" class="item-btn item-btn1" v-on:click="saveMess()" v-show="opeType!=\'view\'"><i class=" icon-ok"></i>保存</a>'+
+                                '<a href="javascript:;" class="item-btn item-btn2" v-on:click="close()"><i class="icon-remove"></i>关闭</a>'+
+                            '</template>'+
+                        '</p>'+
+                    '</slot>'+
+                '</div>'+
+                '<div class="content-con">'+
+                    '<form v-el:form>'+
+                    '<div class="form-block">'+
+                        '<template v-if="form.title">'+
+                            '<p class="title-switch">'+
+                                '<span>{{form.title}}</span>'+
+                            '</p>'+
+                        '</template>'+
+                        '<template v-for="item in form.data">'+
+                            '<template v-if="item.type==\'text\'||item.type==\'number\'||item.type==\'file\'||item.type==\'password\'||item.type==\'email\'">'+
+                    '            <div :class="[\'form-group\',item.validate&&item.validate.required&&\'required\',item.operaFun&&\'specialOpera\',item.roasnm&&\'roasnm\']">'+
+                    '                <label>{{item.name}}{{item.ps}}</label>'+
+                    '                <input type="{{item.type}}"  id="{{item.id}}" name="{{item.field}}" :class="[\'form-control\']" accept="{{item.accept}}" checked="{{item.checked}}" v-model="formData[item.field]" max="{{item.max}}" min="{{item.min}}" maxlength="{{item.maxlength}}" multiple="{{item.multiple}}" v-bind:readonly="item.readonly==true&&readAdd||item.readonly==\'ever\'&&true||readonly" v-on:click="item.operaFun&&inputOpera(item.operaFun)">'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'date\'">'+
+                                '<div :class=[\'form-group\',\'roasnm\',\'form-group-date\',item.validate&&item.validate.required&&\'required\']>'+
+                                    '<label>{{item.name}}</label>'+
+                    '                <input type="text"  id="{{item.id}}" :readonly="item.readonly==true&&readAdd||item.readonly==\'ever\'&&true||readonly" class="form-control" name="{{item.field}}"  v-model="formData[item.field]">'+
+                                '</div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'radio\'">'+
+                    '            <div :class="[\'form-group\',\'form-group-long\',item.validate&&item.validate.required&&\'required\']">'+
+                    '                <label>{{item.name}}</label>'+
+                    '                <template v-for="item2 in item.radio">'+
+                    '                    <span class="form-chose">'+
+                    '                        <input type="radio" name="{{item.field}}" id="{{item2.id}}" value="{{item2.value}}" v-model="formData[item.field]" :disabled="item2.disabled==true&&readAdd||item2.disabled==\'ever\'&&true||disabled">'+
+                    '                        <label for="{{item2.id}}">{{item2.name}}</label>'+
+                    '                    </span>'+
+                    '                </template>'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'checkbox\'">'+
+                    '            <div :class="[\'form-group\',\'form-group-long\',item.validate&&item.validate.required&&\'required\']">'+
+                    '                <label>{{item.name}}</label>'+
+                    '                <template v-for="item2 in item.checkbox">'+
+                    '                    <span class="form-chose">'+
+                    '                        <input type="checkbox" name="{{item.field}}" id="{{item2.id}}" value="{{item2.value}}" v-model="formData[item.field]"  :disabled="item2.disabled==true&&readAdd||item2.disabled==\'ever\'&&true||disabled">'+
+                    '                        <label for="{{item2.id}}">{{item2.name}}</label>'+
+                    '                    </span>'+
+                    '                </template>'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'select\'">'+
+                                '<div :class="[\'form-group\',item.validate&&item.validate.required&&\'required\']">'+
+                                    '<label>{{item.name}}</label>'+
+                                    '<select-stand :id="item.id" :name="item.field" :info-type="item.select.infoTypes" :type="item.select.type" :readonly="item.readonly==true&&readAdd||item.readonly==\'ever\'&&true||readonly" :auto-chose="item.field" :auto-chose-cn="item.select.fieldCn" :localdata="item.select.localdata" :url="item.select.url" :after-chose="item.select.afterChose" :before-chose="item.select.beforeChose" :custom-field="item.select.customField" :spread-event="item.select.spreadEvent" :paras="item.select.paras" :link-field="item.select.linkField">'+
+                                    '</select-stand>'+
+                                    // '<select-search :id="item.id" :info-type="item.select.infoTypes" :type="item.select.type" :readonly="readonly" :auto-chose="item.field" :auto-chose-cn="item.select.fieldCn" :localdata="item.select.localdata" :table="item.select.table" :search="item.select.search" :after-chose="item.select.afterChose" :before-chose="item.select.beforeChose" :custom-field="item.select.customField" :spread-event="item.select.spreadEvent" :paras="item.select.paras" :linkage="item.select.linkage" >'+
+                                    // '</select-search>'+
+                                '</div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'textarea\'">'+
+                    '            <div :class="[\'form-group\',\'form-group-long\',item.validate&&item.validate.required&&\'required\']">'+
+                    '                <label>{{item.name}}</label>'+
+                    '                <textarea class="form-control" :id="item.id" :name="item.field" :cols="item.col" :rows="item.row" v-model="formData[item.field]" v-on:click="item.operaFun&&inputOpera(item.operaFun)" :readonly="item.readonly==true&&readAdd||item.readonly==\'ever\'&&true||readonly"></textarea>'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'image\'">'+
+                    '            <div :class="[\'form-group\',\'form-group-long\']">'+
+                    '                <label>{{item.name}}</label>'+
+                    '                <img src="{{formData[item.field]}}" width="{{item.image.width}}">'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'button\'">'+
+                    '            <div class="form-group form-group-long">'+
+                    '                <label>{{item.name}}</label>'+
+                    '                <template v-for="item2 in item.button">'+
+                    '                    <a href="javascript:void(0);" v-on:click="item2.operaFun()" :class="[\'btn\',\'btn-stand\',item2.className||\'\']" :disabled="item2.disabled"  :id="item2.id">{{item2.name}}</a>  '   +
+                '                     </template>'+     
+                    '            </div>'+
+                    '        </template>'+
+                        '</template>'+
+                        '<template v-if="statusForm.title">'+
+                            '<p class="title-switch">'+
+                                '<span>{{statusForm.title}}</span>'+
+                            '</p>'+
+                            '<template v-for="item in statusForm.data">'+
+                                '<div class="form-group">'+
+                                    '<label>{{item.name}}</label>'+
+                                    '<input type="text" class="form-control" v-model="formData[item.field]" required v-bind:readonly= \'true\' >'+
+                                '</div>'+
+                            '</template>'+
+                        '</template>'+
+                        
+                        '<template v-if="passWordOpera.title">'+
+                            '<p class="title-switch" href="javascript:;">'+
+                                '<span>{{passWordOpera.title}}</span>'+
+                            '</p>'+
+                            '<template v-for="item in passWordOpera.data">'+
+                                '<p class="lock-con">'+
+                                    '<i class="icon-lock"></i>'+
+                                    '<button v-on:click="item.operaFun()" class="btn btn-disabled" disabled>{{item.name}}</button>'+
+                                '</p>'+
+                            '</template>'+
+                        '</template>'+
+                    '</div>'+
+                    '</form>'+
+                    '<div class="loding-con" style="display:none">'+
+                        '<p class="loding"><span></span><span></span><span></span><span></span><span></span><span></span></p>'+
+                    '</div>'+
+                '</div>'+
+              '</div>'

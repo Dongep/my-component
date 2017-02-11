@@ -1,0 +1,29 @@
+'<div class="select-group">' +
+        '<div v-bind:class="{\'select-stand\':true,\'select-stand-readonly\': readonly}">' +
+            '<div class="btn-select dropdown-toggle" data-toggle="dropdown" v-on:click="toggle">' +
+                '<input type="text" class="select-value" data-val={{chosePre.fval}} name="{{autoChose}}" id="{{id}}" v-model="chosePre.fcn" readonly >' +
+                '<span class="caret"></span>' +
+            '</div>' +
+            '<template v-if="type!=\'pop\'">' +
+                '<div class="dropdown-menu scroll-stand" style="display:none">' +
+                    '<template v-if="type==\'single\'">' +
+                        '<ul>' +
+                            '<li data-val="" >' +
+                                '<label v-on:click="chose($event)">...</label>' +
+                            '</li>' +
+                            '<li v-for="item in list"  data-val={{item[customField.val]}} >' +
+                                '<label v-on:click="chose($event)">{{item[customField.cn]}}</label>' +
+                            '</li>' +
+                        '</ul>' +
+                    '</template>' +
+                    '<template v-if="type==\'multi\'">' +
+                        '<ul class="multi-input">' +
+                            '<li v-for="item in list" v-on:click="chose($event)" data-val={{item[customField.val]}} >' +
+                                '<input type="checkbox" id=\'multi{{$index}}\'/><label for=\'multi{{$index}}\'>{{item[customField.cn]}}</label>' +
+                            '</li>' +
+                        '</ul>' +
+                    '</template>' +
+                '</div>' +
+                '</template>' +
+        '</div>' +
+    '</div>'

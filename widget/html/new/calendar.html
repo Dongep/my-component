@@ -1,0 +1,52 @@
+<div class="calendar-custom"> +
+                <div class="calendar-head"> +
+                    <p class="date"> +
+                        <a href="javascript:void(0);" class="btn-left" v-on:click="monthCut"> +
+                            <i class="icon-angle-left"></i> +
+                        </a> +
+                        <a href="javascript:void(0);" class="btn-right" v-on:click="monthAdd"> +
+                            <i class="icon-angle-right"></i> +
+                        </a> +
+                        <span><b>{{year}}</b>年<b>{{month+1}}</b>月</span> +
+                    </p> +
+                </div> +
+                <p class="week clearfix"> +
+                    <span>周一</span> +
+                    <span>周二</span> +
+                    <span>周三</span> +
+                    <span>周四</span> +
+                    <span>周五</span> +
+                    <span>周六</span> +
+                    <span>周日</span> +
+                </p> +
+                <div class="days-con"> +
+                    <ul class="days clearfix"> +
+                        <li v-for="item in days.prev" class="none" track-by="$index"> +
+                            <b>{{item}}</b> +
+                            <span></span> +
+                        </li> +
+                        <li v-for="item in days.now" :class="{'none': year == yearNow && month == monthNow &&  item > dayNow }" v-on:click="click(item)" track-by="$index"> +
+                            <b>{{item}}</b> +
+                            <span :class="{'green':  statuPre[item-1] == 1,'red':  statuPre[item-1] == 2,'empty':  statuPre[item-1] == 3 }"></span> +
+    
+                        </li> +
+                        <li v-for="item in days.next" class="none" track-by="$index"> +
+                            <b>{{item}}</b> +
+                            <span></span> +
+                        </li> +
+                    </ul> +
+                </div> +
+                <template v-if="url">+
+                    <p class="statis"> +
+                        <span class="status green"></span> +
+                        正常出勤<b>{{fattnCount}}</b>天&nbsp; +
+                        <span class="status red"></span> +
+                        迟到<b>{{flateCount}}</b>次&nbsp; +
+                        <span class="status red"></span> +
+                        早退<b>{{fleaveCount}}</b>次&nbsp; +
+                        <span class="status red"></span> +
+                        旷工<b>{{fabsenceCount}}</b>次 +
+                    </p> +
+                </template>+
+    
+            </div>

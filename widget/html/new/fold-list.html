@@ -1,0 +1,16 @@
+'<div class="fold-list">'+
+        '            <p class="fold-list-head">'+
+        '                <span></span>'+
+        '                <span v-for="item in head" >{{item.name}}</span>'+
+        '                <span>操作</span>'+
+        '            </p>'+
+        '            <div class="fold-list-main scroll-stand">'+
+        '                <ul v-bind:class="{\'role-open\':item.childrenList}" v-for="item in list" order={{$index}} >'+
+        '                    <fold-list-main :item="item" :head="head" :opera="opera" :mark="mark" :top-delete="topDelete"></fold-list-main>'+
+        '                </ul>'+
+        '            </div>'+
+                    
+                    '<div class="loding-con" style="display:none">'+
+                        '<p class="loding"><span></span><span></span><span></span><span></span><span></span><span></span></p>'+
+                    '</div>'+
+        '        </div>'

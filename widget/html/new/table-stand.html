@@ -1,0 +1,62 @@
+'<div class="vue-table">'+
+            '<div class="table-par">'+
+                '<table class="table-stand">'+
+                    '<thead>'+
+                        '<tr>'+
+                            '<th v-for="item in thead" width="{{item.width}}">{{item.name}}</th>'+
+                        '</tr>'+
+                    '</thead>'+
+                    '<tbody>'+
+                        '<tr v-for="item in list.results" v-on:click="req($event,\'single\')" v-on:dblclick="req($event,\'double\')"  data-fid={{mark&&item[mark]||item.fid}}>'+
+                            '<template v-for="item2 in thead">'+ 
+                                '<template v-if="typeof item2.getter == \'undefined\'">'+ 
+                                    '<td title={{item[item2.field]}}>{{item[item2.field]}}</td>'+
+                                '</template>'+
+                                '<template v-else>'+ 
+                                    '<td>{{item2.getter(item[item2.field])}}</td>'+
+                                '</template>'+
+                            '</template>'+
+                        '</tr>'+
+                    '</tbody>'+
+                '</table>'+
+            '</div>'+
+            '<div class="loding-con" style="display:none">'+
+                '<p class="loding table-loding">'+
+                    '<span></span>'+
+                    '<span></span>'+
+                    '<span></span>'+
+                    '<span></span>'+
+                    '<span></span>'+
+                    '<span></span>'+
+                '</p>'+
+            '</div>'+
+            '<div class="table-control">'+
+                '<select name="" id="select-page" v-model="list.pageSize" v-on:change="pgChange(1)">'+
+                    '<option v-bind:value="option.value" v-for="option in autoPage">{{option.text }}</option>'+
+                '</select>'+
+                '<p>'+
+                    '<a class="pageUp" v-on:click="pageUp">&lt;</a>'+
+                    '<span>'+
+                        '<b :class="{\'active\':page.active==1}" v-on:click="pgChange(2)" pagev=1>1</b>'+
+                        '<em v-show="page.order==\'head\'||page.order==\'all\'">···</em>'+
+                        '<b v-for="item in page.five" :class="{\'active\':item==page.active}" v-on:click="pgChange(2)" pagev={{item}}>'+
+                        '{{item}}'+
+                        '</b>'+
+                        '<em v-show="page.order==\'tail\'||page.order==\'all\'">···</em>'+
+                        '<template v-if="page.tp>1">'+
+                            '<b :class="{\'active\':page.active==page.tp}" v-on:click="pgChange(2)" pagev={{page.tp}}>'+
+                            '{{page.tp}}'+
+                            '</b>'+
+                        '</template>'+
+                    '</span>'+
+                    '<a class="pageDown" v-on:click="pageDown">&gt;</a>&nbsp;&nbsp;&nbsp;'+
+                    '<span>'+
+                        '共&nbsp;{{page.tr}}&nbsp;条'+
+                    '</span>'+
+                '</p>'+
+                '跳转到'+
+                '<input type="number" id="" v-model="skipNum" max = "{{page.tp}}" min="0">'+
+                '<a href="javascript:;" v-on:click="pgChange(3)"><i class="icon-arrow-right"></i></a>'+
+                '<a href="javascript:;" v-on:click="pgChange(1)"><i class="icon-refresh"></i></a>'+
+            '</div>'+
+        '</div>'

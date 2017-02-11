@@ -1,0 +1,20 @@
+'<ul v-bind:class="{\'role-open\':item.childrenList}" v-for="item in items" order={{$index}}>'+
+                '<li fid={{item.fid}}>'+
+                    '<span v-on:click.stop="switch" v-bind:style="{paddingLeft: pl + \'px\'}">'+
+                        '<template v-if="item.childrenList.length>0">'+
+                            '<a href="javascript:;" class="switchul"><i class="icon-angle-right"></i></a>'+
+                        '</template>'+
+                    '</span>'+
+                    '<span v-bind:style="{paddingLeft: pl + \'px\'}">'+
+                        '<input type="checkbox" id="{{\'cb\'+item.fid}}" fid={{item.fid}} namerole={{item.froleName}} v-bind:checked="item.checked"/>'+
+                        '<label for="{{\'cb\'+item.fid}}">'+
+                        '{{item.froleName}}'+
+                        '</label>'+
+                    '</span>'+
+                '</li>'+
+                '<template v-if="item.childrenList.length>0">'+
+                    '<li>'+
+                    '<role-pop :items=" item.childrenList" :padding="padding+1"></role-pop>'+
+                    '</li>'+
+                '</template>'+
+            '</ul>'

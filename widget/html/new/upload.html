@@ -1,0 +1,73 @@
+'<div class="drop-upload" style="display:none">'+ 
+            ' <template v-if="form"> '+
+                '<div class="form-panel">'+
+                    '<p class="title-switch">'+
+                        '<span>{{formTitle||"请先选择过滤条件"}}</span>'+
+                    '</p>'+
+                    '<form>'+
+                    '<template v-for="item in form">'+
+                            '<template v-if="item.type==\'text\'||item.type==\'number\'||item.type==\'file\'||item.type==\'password\'||item.type==\'email\'">'+
+                    '            <div :class="[\'form-group\',item.validate&&item.validate.required&&\'required\',item.roasnm&&\'roasnm\']">'+
+                    '                <label>{{item.name}}{{item.ps}}</label>'+
+                    '                <input type="{{item.type}}"  id="{{item.id}}" name="{{item.field}}" class="form-control" accept="{{item.accept}}" checked="{{item.checked}}" v-model="formData[item.field]" max="{{item.max}}" min="{{item.min}}" maxlength="{{item.maxlength}}" multiple="{{item.multiple}}" v-bind:readonly="item.readonly==true&&readAdd||item.readonly==\'ever\'&&true||readonly" v-on:click="item.operaFun">'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'date\'">'+
+                                '<div :class=[\'form-group\',\'roasnm\',\'form-group-date\',item.validate&&item.validate.required&&\'required\']>'+
+                                    '<label>{{item.name}}</label>'+
+                    '                <input type="text"  id="{{item.id}}" :readonly="item.readonly==true&&readAdd||item.readonly==\'ever\'&&true||readonly" class="form-control" name="{{item.field}}"  v-model="formData[item.field]">'+
+                                '</div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'radio\'">'+
+                    '            <div :class="[\'form-group\',\'form-group-long\',item.validate&&item.validate.required&&\'required\']">'+
+                    '                <label>{{item.name}}</label>'+
+                    '                <template v-for="item2 in item.radio">'+
+                    '                    <span class="form-chose">'+
+                    '                        <input type="radio" name="{{item.field}}" id="{{item2.id}}" value="{{item2.value}}" v-model="formData[item.field]" :disabled="item2.disabled==true&&readAdd||item2.disabled==\'ever\'&&true||disabled">'+
+                    '                        <label for="{{item2.id}}">{{item2.name}}</label>'+
+                    '                    </span>'+
+                    '                </template>'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'checkbox\'">'+
+                    '            <div :class="[\'form-group\',\'form-group-long\',item.validate&&item.validate.required&&\'required\']">'+
+                    '                <label>{{item.name}}</label>'+
+                    '                <template v-for="item2 in item.checkbox">'+
+                    '                    <span class="form-chose">'+
+                    '                        <input type="checkbox" name="{{item.field}}" id="{{item2.id}}" value="{{item2.value}}" v-model="formData[item.field]"  :disabled="item2.disabled==true&&readAdd||item2.disabled==\'ever\'&&true||disabled">'+
+                    '                        <label for="{{item2.id}}">{{item2.name}}</label>'+
+                    '                    </span>'+
+                    '                </template>'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'select\'">'+
+                                '<div :class="[\'form-group\',item.validate&&item.validate.required&&\'required\']">'+
+                                    '<label>{{item.name}}</label>'+
+                                    '<select-stand :id="item.id" :name="item.field" :info-type="item.select.infoTypes" :type="item.select.type" :readonly="item.readonly==true&&readAdd||item.readonly==\'ever\'&&true||readonly" :auto-chose="item.field" :auto-chose-cn="item.select.fieldCn" :localdata="item.select.localdata" :url="item.select.url" :after-chose="item.select.afterChose" :before-chose="item.select.beforeChose" :custom-field="item.select.customField" :spread-event="item.select.spreadEvent" :paras="item.select.paras" :link-field="item.select.linkField">'+
+                                    '</select-stand>'+
+                                '</div>'+
+                    '        </template>'+
+                        '</template>'+
+                        '</form>'+
+                '    </div>'+
+                '</template>'+
+    '           <div >'+
+// '               <div class="drop-file-block">'+
+//     '                可以将文件拖拽到此处'+
+// '               </div>'+
+    '            <label for="choseFile" class="chose-file-block">将文件拖拽到此处，或者点此选择文件</label>'+
+                '<input type="file" class="chose-file-input" v-on:change="readFile($event)" :multiple="type==\'multi\'" :accept="fileType.join(\',\')" id="choseFile">'+
+                
+                '<a href="javascript:void(0);" v-on:click="uploadFile" class="btn btn-stand btn-upload">上传</a>'+
+                '<a href="javascript:;" class="item-btn item-btn2 upload-close"><i class="icon-remove" v-on:click="close"></i></a>'+
+                '<template v-if="progressBar">'+
+                    '<p class="file-upload">'+
+                        '<i class="icon-paper-clip"></i>'+
+                        '<span class="file-name">{{filesName}}</span>'+
+                        // '<a href="javascript:;">x</a>'+
+                        '<span class="percentage"><b>{{size}}{{unit}}</b> / <b>{{progress}}</b></span>'+
+                        '<em class="progress" :style="{ width: progress}"></em>'+
+                    '</p>'+
+                '<template/>'+
+'        </div>'+
+'    </div>'

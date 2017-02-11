@@ -1,0 +1,90 @@
+'<div class="fold-list ordin-list">'+
+                '<table class="table-stand table-stand-head">'+
+                    '<thead>'+
+                        '<tr>'+
+                            '<template v-if="columnHead">'+
+                                '<th width="{{columnHead.width}}"></th>'+
+                            '</template>'+
+                            '<template v-if="serialNum">'+
+                                '<th width="40"></th>'+
+                            '</template>'+
+                            '<th v-for="item in head"  width="{{item.width}}">{{item.name}}</th>'+
+                            '<th v-if=\'viewFun\'>操作</th>'+
+                        '</tr>'+
+                    '</thead>'+
+                '</table>'+
+                '<div class="fold-list-main scroll-stand">'+
+                    '<table class="table-stand">'+
+                        '<thead>'+
+                            '<tr>'+
+                               '<template v-if="columnHead">'+
+                                    '<th width="{{columnHead.width}}"></th>'+
+                                '</template>'+
+                                '<template v-if="serialNum">'+
+                                    '<th width="40"></th>'+
+                                '</template>'+
+                                '<th v-for="item in head"  width="{{item.width}}"></th>'+
+                                '<th v-if=\'viewFun\'></th>'+
+                            '</tr>'+
+                        '</thead>'+
+                    // '<div class="fold-list-main scroll-stand">'+
+                        '<tbody>'+
+                            '<template v-if="!columnHead">'+
+                                '<tr v-for="item in list" fid="{{mark&&item[mark]||item.fid}}">'+
+                                    '<template v-if="serialNum">'+ 
+                                        '<td>{{($index+1)}}</td>'+
+                                    '</template>'+
+                                    '<template v-for="headItem in head">'+
+                                        '<template v-if="typeof headItem.getter == \'undefined\'">'+ 
+                                            '<td title={{item[headItem.field]}}>{{item[headItem.field]}}</td>'+
+                                        '</template>'+
+                                        '<template v-else>'+ 
+                                            '<td>{{headItem.getter(item[headItem.field])}}</td>'+
+                                        '</template>'+
+                                    '</template>'+
+                                    '<td fid="{{item.fid}}" v-if=\'viewFun\'>'+
+                                        '<a href="javascript:;">查看</a>'+
+                                        '<template v-for="item2 in opera">'+
+                                            '<i class="vertical"></i>'+
+                                            '<a href="javascript:;" >{{item2.name}}</a>'+
+                                        '</template>'+
+                                    '</td>'+
+                                '</tr>'+
+                            '</template>'+
+                            '<template v-else>'+
+                                    '<tr v-for="item2 in columnHead.name" fid="{{$index}}">'+
+                                        '<td>{{item2}}</td>'+
+                                        // '<template v-for="headItem in head">'+
+                                        //     '<template v-if="typeof headItem.getter == \'undefined\'">'+ 
+                                        //         '<span>{{list[$index][headItem.field]}}</span>'+
+                                        //     '</template>'+
+                                        //     '<template v-else>'+ 
+                                        //         '<span>{{headItem.getter(list[$index][headItem.field])}}</span>'+
+                                        //     '</template>'+
+                                        // '</template>'+
+                                        '<template v-for="headItem in head">'+
+                                            '<template v-if="typeof headItem.getter == \'undefined\'">'+ 
+                                                '<td title={{list[headItem.field[$parent.$index]]}}>{{list[headItem.field[$parent.$index]]}}</td>'+
+                                            '</template>'+
+                                            '<template v-else>'+ 
+                                                '<td>{{headItem.getter(list[headItem.field[$parent.$index]],headItem.field[$parent.$index])}}</td>'+
+                                            '</template>'+
+                                        '</template>'+
+                                        '<td fid="{{list[$index].fid}}" v-if=\'viewFun\'>'+
+                                            '<a href="javascript:;">查看</a>'+
+                                            '<template v-for="item2 in opera">'+
+                                                '<i class="vertical"></i>'+
+                                                '<a href="javascript:;" >{{item2.name}}</a>'+
+                                            '</template>'+
+                                        '</td>'+
+                                    '</tr>'+
+                            '</template>'+
+                            
+                        '</tbody>'+
+                    // '</div>'+
+                    '</table>'+
+                '</div>'+                
+                '<div class="loding-con" style="display:none">'+
+                    '<p class="loding"><span></span><span></span><span></span><span></span><span></span><span></span></p>'+
+                '</div>'+
+              '</div>'

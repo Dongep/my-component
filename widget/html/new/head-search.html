@@ -1,0 +1,58 @@
+'<div class="item-search">'+
+                '<form>'+
+                    '<template v-for="item in form">'+
+                            '<template v-if="item.type==\'text\'||item.type==\'number\'||item.type==\'file\'||item.type==\'password\'">'+
+                    '            <div :class="[\'form-group\',item.required&&\'required\']">'+
+                    '                <label>{{item.name}}</label>'+
+                    '                <input type="{{item.type}}" id="{{item.id}}" name="{{item.field}}" class="form-control" accept="{{item.accept}}" checked="{{item.checked}}" v-model="formData[item.field]" max="{{item.max}}" min="{{item.min}}" maxlength="{{item.maxlength}}"  maxlength="item.id" multiple="{{item.multiple}}" v-on:click="item.operaFun&&inputOpera(item.operaFun)" >'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'date\'">'+
+                                '<div :class=[\'form-group\',\'form-group-date\',item.required&&\'required\']>'+
+                                    '<label>{{item.name}}</label>'+
+                    '                <input type="text"  id="{{item.id}}" name="{{item.field}}" lazy class="form-control"  v-model="formData[item.field]" >'+
+                                '</div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'radio\'">'+
+                    '            <div :class="[\'form-group\',\'form-group-long\',item.required&&\'required\']">'+
+                    '                <label>{{item.name}}</label>'+
+                    '                <template v-for="item2 in item.radio">'+
+                    '                    <span class="form-chose">'+
+                    '                        <input type="radio" name="{{item2.field}}" id="{{item2.id}}" value="{{item2.value}}" v-model="formData[item.field]">'+
+                    '                        <label for="{{item2.field}}">{{item2.name}}</label>'+
+                    '                    </span>'+
+                    '                </template>'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'checkbox\'">'+
+                    '            <div :class="[\'form-group\',\'form-group-long\',item.required&&\'required\']">'+
+                    '                <label>{{item.name}}</label>'+
+                    '                <template v-for="item2 in item.checkbox">'+
+                    '                    <span class="form-chose">'+
+                    
+                    '                        <input type="checkbox" name="{{item2.id}}" id="{{item2.id}}" value="{{item2.value}}" v-model="formData[item.field]" :disabled="item2.disabled">'+
+                    '                        <label for="{{item2.id}}">{{item2.name}}</label>'+
+                    '                    </span>'+
+                    '                </template>'+
+                    '            </div>'+
+                    '        </template>'+
+                    '        <template v-if="item.type==\'select\'">'+
+                                '<div :class="[\'form-group\',item.required&&\'required\']">'+
+                                    '<label>{{item.name}}</label>'+
+                                    '<select-stand :info-type="item.select.infoTypes" :type="item.select.types" :readonly="readonly" :auto-chose="item.field" :localdata="item.select.localdata" :url="item.select.url" :after-chose="item.select.afterChose" :before-chose="item.select.beforeChose" :custom-field="item.select.customField" :spread-event="item.select.spreadEvent" :paras="item.select.paras" :link-field="item.select.linkField">'+
+                                    '</select-stand>'+
+                                '</div>'+
+                    '        </template>'+
+                        '</template>'+
+                    '<form>'+
+                    '<br>'+
+                    '<a href="javascript:;" class="btn btn-search" v-on:click="search">查询</a>'+
+                    '<a href="javascript:;" class="btn btn-undo" v-on:click="revoke">'+
+                        '<i class="icon-undo"></i>'+
+                        '<span>撤销</span>'+
+                    '</a>'+
+                    // '<a type="button" class="btn btn-search-ad" v-on:click:advanced>'+
+                    //     '<span class="caret"></span>'+
+                    //     '<b>高级搜索</b>'+
+                    // '</a>'+
+                '</div>'

@@ -1,0 +1,21 @@
+<template>
+    <div class="calendar-custom" id="calendar">
+               {{aa}}
+      </div>
+</template>
+
+<script>
+module.exports = {
+    data: function(){
+        return{
+            aa: 'k'
+        }
+    },
+    ready: function(){
+        alert(0)
+    }
+}
+</script>
+<style>
+    
+</style>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>公共组件文档</title>
+  <link rel="stylesheet" href="build/main.min.css">
+  <link rel="stylesheet" href="test.css">
+</head>
+
+<body>
+  <div class="content">
+    <upload :url="upload.url" :file-type="upload.fileType" :type="upload.type" :form="upload.form" v-ref:upload></upload>
+    <head-search :form="headSearch.form" :search-fun="headSearch.searchFun" v-ref:search></head-search>
+    <calendar :click-fun="calendar.clickFun" :url="calendar.url" v-ref:calendar></calendar>
+    <ordin-list :head="list.head" :opera="list.opera" :must="list.must" :view-fun="list.viewFun" :item-click="list.itemClick"
+      :mark="list.mark" v-ref:ordinList></ordin-list>
+    <form-panel-pro :form="formPanel2.form" :req-url="formPanel2.reqUrl" :two-column="formPanel2.twoColumn" :expand="formPanel2.expand"
+      :validate="formPanel2.validate" v-ref:formPanel></form-panel-pro>
+  </div>
+
+
+
+
+
+  <script src="../build/lib.js"></script>
+  <script src="../build/widget.js"></script>
+  <script src="test.js"></script>
+</body>
+
+</html>
